@@ -19,7 +19,7 @@ public class RegexService {
     }
 
     private static void getAllMatchesByType(String regex, String str, String typeInfo) {
-        Pattern p = Pattern.compile(regex);
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(str);
         StringBuilder sb = createStringBuilderMessage(m, typeInfo);
         printResult(sb ,typeInfo);
