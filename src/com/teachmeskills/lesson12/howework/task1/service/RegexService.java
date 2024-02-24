@@ -1,15 +1,15 @@
 package com.teachmeskills.lesson12.howework.task1.service;
 
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.teachmeskills.lesson12.howework.task1.consts.Constants.*;
 
 public class RegexService {
 
-    private static boolean IS_MATCHES = false;
-
     public static void getAllAbbreviationsFromString(String str) {
-        Matcher m = ABBREVIATION_REGEX_PATTERN.matcher(str);
+        Pattern p = Pattern.compile(ABBREVIATION_REGEX_PATTERN);
+        Matcher m = p.matcher(str);
         StringBuilder sb = getAllMatches(m);
         printResult(sb);
     }
@@ -20,17 +20,16 @@ public class RegexService {
             stringBuilder
                     .append(m.group())
                     .append(", ");
-            IS_MATCHES = true;
         }
         return stringBuilder;
     }
 
     private static void printResult(StringBuilder stringBuilder) {
-        if (IS_MATCHES) {
+        if (stringBuilder.toString().endsWith(SUCCESS_PREFIX_MESSAGE)) {
+            System.out.println(NO_MATCHES_MESSAGE);
+        } else {
             stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length() - 1, ".");
             System.out.println(stringBuilder);
-        } else {
-            System.out.println(NO_MATCHES_MESSAGE);
         }
     }
 }
