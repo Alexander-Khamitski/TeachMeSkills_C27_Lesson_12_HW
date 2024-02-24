@@ -7,19 +7,20 @@ import java.util.regex.Pattern;
 public class RegexService {
 
     public static void getAllMatchesFromString(String str) {
-        if (Constants.TYPE_INFOS.length != Constants.PATTERNS.length) {
+        if (Constants.TYPE_INFOS.length != Constants.REGEXES.length) {
             throw new RuntimeException("'Type infos' and 'Patterns' arrays should have same lengths.");
         } else {
             for (int i = 0; i < Constants.TYPE_INFOS.length; i++) {
-                Pattern pattern = Constants.PATTERNS[i];
+                String regex = Constants.REGEXES[i];
                 String typeInfo = Constants.TYPE_INFOS[i];
-                getAllMatchesByType(pattern, str, typeInfo);
+                getAllMatchesByType(regex, str, typeInfo);
             }
         }
     }
 
-    private static void getAllMatchesByType(Pattern pattern, String str, String typeInfo) {
-        Matcher m = pattern.matcher(str);
+    private static void getAllMatchesByType(String regex, String str, String typeInfo) {
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(str);
         StringBuilder sb = createStringBuilderMessage(m, typeInfo);
         printResult(sb ,typeInfo);
     }

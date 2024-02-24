@@ -1,13 +1,15 @@
 package com.teachmeskills.lesson12.howework.task1.service;
 
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.teachmeskills.lesson12.howework.task1.consts.Constants.*;
 
 public class RegexService {
 
     public static void getAllAbbreviationsFromString(String str) {
-        Matcher m = ABBREVIATION_REGEX_PATTERN.matcher(str);
+        Pattern p = Pattern.compile(ABBREVIATION_REGEX_PATTERN);
+        Matcher m = p.matcher(str);
         StringBuilder sb = getAllMatches(m);
         printResult(sb);
     }
